@@ -2,12 +2,12 @@
 import mongoose from "mongoose";
 
 const ProductSalesSchema = new mongoose.Schema({
-  productName: {
+  title: {
     // 상품명
     type: String,
     required: true,
   },
-  description: {
+  content: {
     // 작성 내용
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const ProductSalesSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  productStatus: {
+  status: {
     // 상품 상태
     type: String,
     required: false, // productStatus field is Not required
