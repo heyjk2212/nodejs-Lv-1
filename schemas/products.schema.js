@@ -19,7 +19,7 @@ const ProductSalesSchema = new mongoose.Schema({
   },
   password: {
     // 비밀번호
-    type: Number,
+    type: String,
     required: true,
   },
   status: {
@@ -30,7 +30,7 @@ const ProductSalesSchema = new mongoose.Schema({
   createdAt: {
     // 작성 날짜
     type: Date, // The createdAt field has type Date
-    required: true,
+    required: false,
   },
 });
 
