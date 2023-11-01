@@ -86,10 +86,11 @@ router.patch("/products/:_id", async (req, res) => {
     }
 
     // 상품명, 작성 내용, 상품 상태, 비밀번호를 request에서 전달받기
-    const { title, content, author, password } = req.body;
+    const { title, content, status, password } = req.body;
 
     // 변경하려는 제품의 정보 가져오기
     const product = await ProductSales.findById(_id).exec();
+    console.log(product);
 
     // 선택한 상품이 존재하지 않을 경우, “상품 조회에 실패하였습니다." 메시지 반환하기
     if (!product) {
@@ -100,7 +101,7 @@ router.patch("/products/:_id", async (req, res) => {
     if (product.password === password) {
       product.title = title;
       product.content = content;
-      product.author = author;
+      product.status = status;
       product.password = password;
 
       // 변경한 정보들 저장하기
