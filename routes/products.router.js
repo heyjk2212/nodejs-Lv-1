@@ -54,7 +54,7 @@ router.get("/products/:_id", async (req, res) => {
   // 조회할 상품 id를 가져온다
   const { _id } = req.params;
 
-  if (_id) {
+  if (!_id) {
     return res
       .status(400)
       .json({ message: "데이터 형식이 올바르지 않습니다." });
