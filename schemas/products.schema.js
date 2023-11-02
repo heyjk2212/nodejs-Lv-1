@@ -26,11 +26,15 @@ const ProductSalesSchema = new mongoose.Schema({
     // 상품 상태
     type: String,
     required: false, // productStatus field is Not required
+    default: "For Sale",
+    // 목록에 정의된 값들 중 하나만 할당. "For Sale", "Sold Out"중 하나로 제한된다
+    enum: ["For Sale", "Sold Out"],
   },
   createdAt: {
     // 작성 날짜
     type: Date, // The createdAt field has type Date
     required: false,
+    default: Date.now,
   },
 });
 
