@@ -54,7 +54,7 @@ router.get("/products/:_id", async (req, res) => {
   // 조회할 상품 id를 가져온다
   const { _id } = req.params;
 
-  if (_id) {
+  if (!_id) {
     return res
       .status(400)
       .json({ message: "데이터 형식이 올바르지 않습니다." });
@@ -62,6 +62,7 @@ router.get("/products/:_id", async (req, res) => {
 
   // 상품명, 작성 내용, 작성자명, 상품 상태, 작성 날짜 조회하기
   // .select() 메서드를 사용하면 원하는 필드만 선택해서 클라이언트에 리턴한다!
+  try{
   const product = await ProductSales.findById({ _id })
     .select("_id title content author status createdAt")
     .exec();
@@ -71,6 +72,11 @@ router.get("/products/:_id", async (req, res) => {
   }
 
   return res.status(200).json({ product });
+
+  }catch(err){
+    res.status(500).json({ message: "상품 조회에 실패하였습니다." })
+  }
+
 });
 
 // 상품 정보 수정 API
@@ -78,6 +84,8 @@ router.patch("/products/:_id", async (req, res) => {
   try {
     // 변경할 상품을 id를 통해 가져온다
     const { _id } = req.params;
+
+    console.log(_id)
 
     if (!_id) {
       return res
@@ -90,7 +98,7 @@ router.patch("/products/:_id", async (req, res) => {
 
     // 변경하려는 제품의 정보 가져오기
     const product = await ProductSales.findById(_id).exec();
-    console.log(product);
+    // console.log(product);
 
     // 선택한 상품이 존재하지 않을 경우, “상품 조회에 실패하였습니다." 메시지 반환하기
     if (!product) {
